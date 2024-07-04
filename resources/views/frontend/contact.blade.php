@@ -6,6 +6,6 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Welcome to my new project</h1>
+    <h1>Welcome to contact page</h1>
 </body>
 </html>
