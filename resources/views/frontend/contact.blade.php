@@ -7,5 +7,8 @@
 </head>
 <body>
     <h1>Welcome to contact page</h1>
+
+    <a href="{{url('/')}}">Back to Home</a>
+
 </body>
 </html>
