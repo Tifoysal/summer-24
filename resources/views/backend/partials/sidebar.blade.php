@@ -20,6 +20,23 @@
               </a>
 
             </li>
+
+            <li class="nav-item">
+              <a class="nav-link d-flex align-items-center gap-2" href="{{route('category.list')}}">
+                <svg class="bi"><use xlink:href="#cart"/></svg>
+                Category
+              </a>
+            </li>
+
+
+
+            <li class="nav-item">
+              <a class="nav-link d-flex align-items-center gap-2" href="{{route('category.list')}}">
+                <svg class="bi"><use xlink:href="#cart"/></svg>
+                Category
+              </a>
+            </li>
+
             <li class="nav-item">
               <a class="nav-link d-flex align-items-center gap-2" href="{{url('/product-list')}}">
                 <svg class="bi"><use xlink:href="#cart"/></svg>

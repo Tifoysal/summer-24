@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\HomeController;
@@ -20,4 +21,10 @@ Route::get('/order-list',[OrderController::class,'orderList']);
 
 Route::get('/product-list',[ProductController::class,'productList']);
 
-Route::get('/customer-list',[CustomerController::class,'customerList']);
+Route::get('/customer-list',[CustomerController::class,'customerList'])->name('customer.list');
+
+Route::get('/category-list',[CategoryController::class,'list'])->name('category.list');
+
+Route::get('/category-form',[CategoryController::class, 'form'])->name('category.form');
+
+Route::post('/category-store',[CategoryController::class,'store'])->name('category.store');
