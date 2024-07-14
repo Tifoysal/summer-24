@@ -9,7 +9,11 @@ class CategoryController extends Controller
 {
     public function list()
     {
-       return view('backend.category-list');   
+        
+        $allCategory=Category::all();
+       
+       
+       return view('backend.category-list',compact('allCategory'));   
     }
 
     public function form()

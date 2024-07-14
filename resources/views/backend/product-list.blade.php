@@ -4,6 +4,8 @@
 
 <h1>Product List</h1>
 
+<a class="btn btn-success" href="{{route('product.create')}}">Create new product</a>
+
 <table class="table">
   <thead>
     <tr>

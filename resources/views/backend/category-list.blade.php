@@ -11,30 +11,33 @@
   <thead>
     <tr>
       <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
+      <th scope="col">Category Name</th>
+      <th scope="col">Description</th>
+      <th scope="col">Status</th>
+      <th scope="col">Action</th>
+
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
+
+@foreach ($allCategory as $cat)
+ 
+<tr>
+      <th scope="row">{{$cat->id}}</th>
+      <td>{{$cat->name}}</td>
+      <td>{{$cat->description}}</td>
+      <td>{{$cat->status}}</td>
+      <td>
+        <a class="btn btn-success" href="">View</a>
+        <a class="btn btn-info" href="">Edit</a>
+        <a class="btn btn-danger" href="">Delete</a>
+      </td>
     </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Larry</td>
-      <td>the Bird</td>
-      <td>@twitter</td>
-    </tr>
+
+@endforeach
+   
+
+    
   </tbody>
 </table>
 
