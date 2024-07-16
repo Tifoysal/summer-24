@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CustomerController;
@@ -13,22 +14,34 @@ use Illuminate\Support\Facades\Route;
 // });
 
 
-Route::get('/',[HomeController::class,'home']);
 
-Route::get('/contact-us',[ContactController::class,'contact']);
 
-Route::get('/order-list',[OrderController::class,'orderList']);
+Route::get('/login',[AuthenticationController::class,'loginForm'])->name('login');
 
-Route::get('/product-list',[ProductController::class,'productList'])->name('product.list');
+Route::post('/do-login',[AuthenticationController::class, 'doLogin'])->name('do.login');
 
-Route::get('/product-create',[ProductController::class, 'create'])->name('product.create');
 
-Route::post('/product-store',[ProductController::class,'store'])->name('product.store');
+Route::group(['middleware'=>'auth'],function(){
+    
+    Route::get('/',[HomeController::class,'home'])->name('dashboard');
 
-Route::get('/customer-list',[CustomerController::class,'customerList'])->name('customer.list');
+    Route::get('/logout',[AuthenticationController::class, 'logout'])->name('logout');
 
-Route::get('/category-list',[CategoryController::class,'list'])->name('category.list');
+    Route::get('/contact-us',[ContactController::class,'contact']);
 
-Route::get('/category-form',[CategoryController::class, 'form'])->name('category.form');
+    Route::get('/order-list',[OrderController::class,'orderList']);
 
-Route::post('/category-store',[CategoryController::class,'store'])->name('category.store');
+    Route::get('/product-list',[ProductController::class,'productList'])->name('product.list');
+
+    Route::get('/product-create',[ProductController::class, 'create'])->name('product.create');
+
+    Route::post('/product-store',[ProductController::class,'store'])->name('product.store');
+
+    Route::get('/customer-list',[CustomerController::class,'customerList'])->name('customer.list');
+
+    Route::get('/category-list',[CategoryController::class,'list'])->name('category.list');
+
+    Route::get('/category-form',[CategoryController::class, 'form'])->name('category.form');
+
+    Route::post('/category-store',[CategoryController::class,'store'])->name('category.store');
+});

@@ -41,4 +41,6 @@
   </tbody>
 </table>
 
+{{ $allCategory->links() }}
+
 @endsection
