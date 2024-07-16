@@ -6,11 +6,6 @@
     <title>Document</title>
 </head>
 <body>
-
-<a href="{{route('App')}}">Book appointment</a>
-
-
-<h1>Bismillah project</h1>
-
+    <h1>See Our Products Here</h1>
 </body>
 </html>
