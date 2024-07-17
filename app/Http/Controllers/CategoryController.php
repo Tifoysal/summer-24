@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class CategoryController extends Controller
 {
@@ -23,7 +24,19 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
 
-        //dd($request->all()); //to see data comming from form
+        $validation=Validator::make($request->all(),
+        [
+            'cat_name'=>'required|min:20',
+        ]);
+        
+      if($validation->fails())
+      {
+        notify()->error($validation->getMessageBag());
+        return redirect()->back();
+      }
+
+
+        // dd($request->all()); //to see data comming from form
 
         //lets store data into database
 
