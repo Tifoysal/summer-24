@@ -10,7 +10,7 @@ class ProductController extends Controller
     public function productList(){
 
        $allProduct=Product::paginate(5);
-       
+
         return view('backend.product-list',compact('allProduct'));
     }
 
@@ -19,7 +19,7 @@ class ProductController extends Controller
     {
 
         return view('backend.product-create');
-        
+
     }
 
 

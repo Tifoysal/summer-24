@@ -9,9 +9,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+
 
 
 
@@ -22,7 +20,7 @@ Route::post('/do-login',[AuthenticationController::class, 'doLogin'])->name('do.
 
 
 Route::group(['middleware'=>'auth'],function(){
-    
+
     Route::get('/',[HomeController::class,'home'])->name('dashboard');
 
     Route::get('/logout',[AuthenticationController::class, 'logout'])->name('logout');

@@ -48,16 +48,16 @@
                 Reports
               </a>
             </li>
-            
+
           </ul>
 
-          
-          
+
+
 
           <hr class="my-3">
 
           <ul class="nav flex-column mb-auto">
-            
+
             <li class="nav-item">
               <a class="nav-link d-flex align-items-center gap-2" href="{{route('logout')}}">
                 <svg class="bi"><use xlink:href="#door-closed"/></svg>
@@ -65,7 +65,7 @@
               </a>
             </li>
 
-            
+
           </ul>
         </div>
       </div>
