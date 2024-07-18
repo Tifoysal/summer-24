@@ -15,6 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->double('price',10,2);
+            $table->string('image')->nullable();
+            //image/any file will store in filesystem- then that path
+            //will store in database
+
+            
             $table->timestamps();
         });
     }
