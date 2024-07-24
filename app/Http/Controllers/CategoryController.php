@@ -26,7 +26,7 @@ class CategoryController extends Controller
 
         $validation=Validator::make($request->all(),
         [
-            'cat_name'=>'required|min:20',
+            'cat_name'=>'required|min:2',
         ]);
         
       if($validation->fails())

@@ -31,13 +31,13 @@
 
 
             <li class="nav-item">
-              <a class="nav-link d-flex align-items-center gap-2" href="{{url('/product-list')}}">
+              <a class="nav-link d-flex align-items-center gap-2" href="{{route('product.list')}}">
                 <svg class="bi"><use xlink:href="#cart"/></svg>
                 Products
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link d-flex align-items-center gap-2" href="{{url('/customer-list')}}">
+              <a class="nav-link d-flex align-items-center gap-2" href="{{route('customer.list')}}">
                 <svg class="bi"><use xlink:href="#people"/></svg>
                 Customers
               </a>
