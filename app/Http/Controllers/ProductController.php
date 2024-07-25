@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -10,7 +11,8 @@ class ProductController extends Controller
 {
     public function productList(){
 
-       $allProduct=Product::paginate(5);
+       $allProduct=Product::with('category')->paginate(5);
+    //    dd($allProduct);
 
         return view('backend.product-list',compact('allProduct'));
     }
@@ -18,8 +20,10 @@ class ProductController extends Controller
 
     public function create()
     {
+       
+        $allCategory=Category::all();
 
-        return view('backend.product-create');
+        return view('backend.product-create',compact('allCategory'));
 
     }
 
@@ -27,12 +31,15 @@ class ProductController extends Controller
     public function store(Request $request)
     {
 
+        // dd($request->all());
 
         $validation=Validator::make($request->all(),[
             'product_name'=>'required',
             'product_price'=>'required|numeric|min:10',
-            'product_image'=>'required|file|max:1024'
+            'product_image'=>'required|file|max:1024',
+            'category_id'=>'required'
         ]);
+
         if($validation->fails())
         {
             notify()->error($validation->getMessageBag());
@@ -58,7 +65,8 @@ class ProductController extends Controller
        Product::create([
         'name'=>$request->product_name,
         'price'=>$request->product_price,
-        'image'=>$fileName
+        'image'=>$fileName,
+        'category_id'=>$request->category_id
        ]);
 
        return redirect()->route('product.list');

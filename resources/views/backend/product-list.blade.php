@@ -13,6 +13,7 @@
       <th scope="col">Product Image</th>
       <th scope="col">Product Name</th>
       <th scope="col">Price</th>
+      <th scope="col">Category Name</th>
       <th scope="col">Action</th>
     </tr>
   </thead>
@@ -26,6 +27,7 @@
       </td>
       <td>{{$product->name}}</td>
       <td>{{$product->price}} BDT</td>
+      <td>{{$product->category->name}}</td>
       <td>
         <a href="">View</a>
       </td>
