@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\Frontend\CustomerController as FrontendCustomerController;
 use App\Http\Controllers\Frontend\HomeController as FrontendHomeController;
 use App\Http\Controllers\Frontend\ProductController as FrontendProductController;
 use App\Http\Controllers\HomeController;
@@ -17,7 +18,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/',[FrontendHomeController::class,'home'])->name('home');
 Route::get('/all-products',[FrontendProductController::class,'allProduct'])->name('frontend.products');
+Route::post('/registration',[FrontendCustomerController::class,'registration'])->name('customer.registration');
 
+Route::post('/do-login',[FrontendCustomerController::class,'customerLogin'])->name('customer.login');
 
 // for admin panel
 
