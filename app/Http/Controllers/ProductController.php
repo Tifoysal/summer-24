@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Product;
+use GuzzleHttp\Handler\Proxy;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Validator;
 
 class ProductController extends Controller
@@ -70,6 +72,57 @@ class ProductController extends Controller
        ]);
 
        return redirect()->route('product.list');
+
+    }
+
+    public function delete($id)
+    {
+
+        // Product::find($id)->delete();
+        $product=Product::find($id);//data anlam
+        $product->delete();//delete korlam
+
+        notify()->success('Product Deleted successfully.');
+
+        return redirect()->back();
+
+        
+    }
+
+
+    public function viewProduct($id)
+    {
+        $product=Product::find($id);
+
+        return view('backend.page.product-view',compact('product'));
+    }
+
+    public function edit($paglaID)
+    {
+
+        $product=Product::find($paglaID);
+        $allCategory=Category::all();
+        return view('backend.page.product-edit',compact('allCategory','product'));
+    }
+
+    public function update(Request $request,$paglaId)
+    {
+        // dd($request->all());
+
+        //validation
+
+
+
+        //query
+        $product=Product::find($paglaId);
+        $product->update([
+            'name'=>$request->product_name,
+            'price'=>$request->product_price,
+        ]);
+      
+        notify()->success('Product updated successfully.');
+        return redirect()->route('product.list');
+
 
     }
 }

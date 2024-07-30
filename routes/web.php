@@ -22,6 +22,10 @@ Route::post('/registration',[FrontendCustomerController::class,'registration'])-
 
 Route::post('/do-login',[FrontendCustomerController::class,'customerLogin'])->name('customer.login');
 
+Route::get('/show-product/{productId}',[FrontendProductController::class,'showProduct'])->name('show.product');
+
+
+
 // for admin panel
 
 Route::group(['prefix' => 'admin'], function () {
@@ -47,7 +51,12 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/product-create', [ProductController::class, 'create'])->name('product.create');
 
         Route::post('/product-store', [ProductController::class, 'store'])->name('product.store');
+        Route::get('/product/delete/{p_id}',[ProductController::class,'delete'])->name('product.delete');
+        Route::get('/product/view/{p_id}',[ProductController::class,'viewProduct'])->name('product.view');
+        Route::get('/product/edit/{sojibId}',[ProductController::class, 'edit'])->name('product.edit');
 
+        Route::post('/product/update/{paglaID}',[ProductController::class, 'update'])->name('product.update');
+        
         Route::get('/customer-list', [CustomerController::class, 'customerList'])->name('customer.list');
 
         Route::get('/category-list', [CategoryController::class, 'list'])->name('category.list');

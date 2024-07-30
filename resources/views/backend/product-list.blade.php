@@ -19,9 +19,9 @@
   </thead>
   <tbody>
 
-  @foreach ($allProduct as $product)
+  @foreach ($allProduct as $key=>$product)
   <tr>
-      <th scope="row">{{$product->id}}</th>
+      <th scope="row">{{$key+1}}</th>
       <td>
         <img src="{{url('/uploads/'.$product->image)}}" alt="" width="60">
       </td>
@@ -29,7 +29,9 @@
       <td>{{$product->price}} BDT</td>
       <td>{{$product->category->name}}</td>
       <td>
-        <a href="">View</a>
+        <a href="{{route('product.view',$product->id)}}" class="btn btn-primary">View</a>
+        <a href="{{route('product.edit',$product->id)}}" class="btn btn-success">Edit</a>
+        <a href="{{route('product.delete',$product->id)}}" class="btn btn-danger">Delete</a>
       </td>
     </tr>
   @endforeach

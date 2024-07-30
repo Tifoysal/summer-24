@@ -15,4 +15,19 @@ class ProductController extends Controller
       $products=Product::all();
        return view('frontend.products',compact('products'));
     }
+
+    public function  showProduct($id)
+    {
+      
+      $singleProduct=Product::find($id);
+
+     
+      $relatedProduct=Product::where('category_id',$singleProduct->category_id)
+                      ->where('id','!=',$singleProduct->id)
+                      ->limit(4)
+                      ->get();
+
+      //method chaining
+      return view('frontend.pages.single_product',compact('singleProduct','relatedProduct'));
+    }
 }
