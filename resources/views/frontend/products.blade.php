@@ -32,12 +32,12 @@
               </div>
             </div>
 
-            <!-- <div class="d-flex flex-row">
-              <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary flex-fill me-1" data-mdb-ripple-color="dark">
+            <div class="d-flex flex-row">
+              <a href="{{route('add.to.cart',$prod->id)}}" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary flex-fill me-1" data-mdb-ripple-color="dark">
                 Add to cart
-              </button>
+              </a>
               <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-danger flex-fill ms-1">Buy now</button>
-            </div> -->
+            </div>
 
           </div>
         </div>

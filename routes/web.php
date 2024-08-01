@@ -25,6 +25,8 @@ Route::post('/do-login',[FrontendCustomerController::class,'customerLogin'])->na
 Route::get('/show-product/{productId}',[FrontendProductController::class,'showProduct'])->name('show.product');
 
 
+Route::get('/add-to-cart/{productId}',[OrderController::class, 'addToCart'])->name('add.to.cart');
+
 
 // for admin panel
 

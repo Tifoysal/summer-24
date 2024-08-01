@@ -131,7 +131,7 @@
 
             <br>
 
-            0 items - $0.00
+            {{ count(session()->get('basket')) }} item(s) - 00
 
           </div>
 

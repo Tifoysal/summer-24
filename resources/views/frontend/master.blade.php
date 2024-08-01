@@ -28,12 +28,14 @@
     <link rel="stylesheet" href="http://labs.bootstrapthemes.co/demo/html/Orani/css/style.css">
 
     <link rel="stylesheet" href="http://labs.bootstrapthemes.co/demo/html/Orani/css/responsive.css">
+	@notifyCss
 
 </head>
 
 <body>
 
-   
+@include('notify::components.notify')
+
 
 
     @include('frontend.partials.header')
@@ -57,6 +59,7 @@
 	<!-- Script -->
 
 	<script src="http://labs.bootstrapthemes.co/demo/html/Orani/js/script.js"></script>
+	@notifyJs
 
 </body>
 
