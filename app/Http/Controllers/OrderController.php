@@ -55,7 +55,7 @@ class OrderController extends Controller
                     'subtotal'=>1 * $product->price
                 ];
 
-                // dd($myCart);
+                
                 session()->put('basket',$myCart);
                 notify()->success("Product Added to Cart");
                 return redirect()->back();
