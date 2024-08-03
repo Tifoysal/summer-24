@@ -37,7 +37,6 @@
 @include('notify::components.notify')
 
 
-
     @include('frontend.partials.header')
 
 

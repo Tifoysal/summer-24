@@ -27,6 +27,7 @@ Route::get('/show-product/{productId}',[FrontendProductController::class,'showPr
 
 Route::get('/add-to-cart/{productId}',[OrderController::class, 'addToCart'])->name('add.to.cart');
 
+Route::get('/view-cart',[OrderController::class, 'viewCart'])->name('view.cart');
 
 // for admin panel
 

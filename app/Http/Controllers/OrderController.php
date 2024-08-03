@@ -42,8 +42,18 @@ class OrderController extends Controller
 
             if(array_key_exists($pId,$myCart))
             {
-                //step 2: quantity update
-                dd("product exist, quantity update");
+                // dd($myCart[$pId]);
+                //step 2: quantity update, subtotal update
+               //q=1,sub=300
+                $myCart[$pId]['quantity'] = $myCart[$pId]['quantity'] + 1;
+                $myCart[$pId]['subtotal'] = $myCart[$pId]['quantity'] * $myCart[$pId]['price'];
+
+                session()->put('basket',$myCart);
+
+                notify()->success('Quantity updated.');
+                return redirect()->back();
+
+
             }
             else{
                 //step 3: add to cart
@@ -61,5 +71,13 @@ class OrderController extends Controller
                 return redirect()->back();
             }
         }
+    }
+
+    public function viewCart()
+    {
+
+        $myCart=session()->get('basket');
+    //    dd($myCart);
+        return view('frontend.pages.cart',compact('myCart'));
     }
 }
