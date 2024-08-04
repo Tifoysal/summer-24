@@ -50,14 +50,14 @@
             @auth('customerGuard')
             <li>
               <!-- Button trigger modal -->
-              <a type="" class="" >
+              <a type="" class="">
                 {{ auth('customerGuard')->user()->name }}
               </a>
             </li>
-          
+
             <li>
               <!-- Button trigger modal -->
-              <a type="" class="" >
+              <a type="" class="">
                 Logout
               </a>
             </li>
@@ -149,26 +149,19 @@
             0
             @endif -->
 
-          <!-- ternary operator -->
+            <!-- ternary operator -->
 
-          <!-- (condition) ? if block : else block -->
+            <!-- (condition) ? if block : else block -->
+            @if(session()->has('basket'))
 
-         
-
-          {{ session()->has('basket') ? count(session()->get('basket')) : 0}} 
-
-          
-          item(s) - {{ array_sum(array_column(session()->get('basket'),'subtotal')) }}
+            {{ count(session()->get('basket')) }} item(s) - {{ array_sum(array_column(session()->get('basket'),'subtotal')) }}
            
+            @else
 
-          <!-- @php 
-              $cartArray=session()->get('basket');
-              $subtotalArray=array_column($cartArray,'subtotal');
-              @endphp
+            0 item(s)
 
-              dd(array_sum($subtotalArray)) -->
+            @endif
 
-       
 
           </div>
 

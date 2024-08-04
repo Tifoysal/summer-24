@@ -31,7 +31,8 @@ class OrderController extends Controller
                 'product_name'=>$product->name,
                 'price'=>$product->price,
                 'quantity'=>1,
-                'subtotal'=>1 * $product->price
+                'subtotal'=>1 * $product->price,
+                'image'=>$product->image
             ];
 
             session()->put('basket',$cart);
@@ -62,7 +63,8 @@ class OrderController extends Controller
                     'product_name'=>$product->name,
                     'price'=>$product->price,
                     'quantity'=>1,
-                    'subtotal'=>1 * $product->price
+                    'subtotal'=>1 * $product->price,
+                    'image'=>$product->image
                 ];
 
                 
@@ -75,9 +77,47 @@ class OrderController extends Controller
 
     public function viewCart()
     {
+        //ternary operator (condition) ? statement 1 : statement2
 
-        $myCart=session()->get('basket');
+        //null coalescing ??
+        //$a=5; $b=6;
+        // $x= $a ?? $b
+
+        $myCart=session()->get('basket') ?? [];
+
     //    dd($myCart);
         return view('frontend.pages.cart',compact('myCart'));
+    }
+
+    public function clearCart()
+    {
+
+      session()->forget('basket');
+
+      notify()->success('Cart clear.');
+
+      return redirect()->back();
+
+    }
+
+    public function cartItemDelete($productId)
+    {
+        
+        $cart=session()->get('basket');
+
+       unset($cart[$productId]);
+
+
+    
+       session()->put('basket',$cart);
+
+       notify()->success('Item remove.');
+
+       return redirect()->back();
+
+
+
+       
+
     }
 }
