@@ -120,4 +120,49 @@ class OrderController extends Controller
        
 
     }
+
+    public function checkout()
+    {
+        return view('frontend.pages.checkout');
+    }
+
+    public function placeOrder(Request $request)
+    {
+
+        //validation
+
+
+
+        //quary for store data into Orders table
+
+        $order=Order::create([
+            'receiver_name'=>$request->receiver_name,
+            'customer_id'=>auth('customerGuard')->user()->id,
+
+
+
+        ]);
+
+
+
+        //quary for storing data into Order_details table
+            $cart=session()->get('basket');
+
+            foreach($cart as $singleData)
+            {
+                OrderDetail::create([
+                    'order_id'=>$order->id,
+                    'product_id'=>$singleData['product_id']
+
+
+
+                    
+                ]);
+            }
+
+
+        notify()->success('Order place successfully.');
+        return redirect()->route('home');
+
+    }
 }

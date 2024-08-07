@@ -33,6 +33,13 @@ Route::get('/clear-cart',[OrderController::class, 'clearCart'])->name('cart.clea
 
 Route::get('/cart/item/delete/{id}',[OrderController::class, 'cartItemDelete'])->name('cart.item.delete');
 
+Route::group(['middleware'=>'customer_auth'],function (){
+    Route::get('/logout',[FrontendCustomerController::class,'logout'])->name('customer.logout');
+    Route::get('/checkout',[OrderController::class, 'checkout'])->name('checkout');
+    Route::post('/place-order',[OrderController::class, 'placeOrder'])->name('order.place');
+});
+
+
 // for admin panel
 
 Route::group(['prefix' => 'admin'], function () {

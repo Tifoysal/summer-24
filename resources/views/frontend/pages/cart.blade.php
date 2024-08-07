@@ -62,7 +62,7 @@
             
           <div class="">
           <p>Total: {{array_sum(array_column(session()->get('basket'),'subtotal'))}} BDT</p>
-            <a  class="btn btn-warning btn-block btn-lg">Proceed to Pay</a>
+            <a href="{{route('checkout')}}" class="btn btn-warning btn-block btn-lg">Proceed to Checkout</a>
           </div>
         </div>
         @else

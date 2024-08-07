@@ -83,4 +83,14 @@ class CustomerController extends Controller
         return redirect()->route('home');
        }
     }
+
+    public function logout(){
+
+        auth('customerGuard')->logout();
+
+        session()->forget('basket');
+
+        notify()->success('logout success.');
+        return redirect()->route('home');
+    }
 }

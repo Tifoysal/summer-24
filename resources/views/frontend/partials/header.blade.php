@@ -57,7 +57,7 @@
 
             <li>
               <!-- Button trigger modal -->
-              <a type="" class="">
+              <a href="{{route('customer.logout')}}" class="">
                 Logout
               </a>
             </li>
