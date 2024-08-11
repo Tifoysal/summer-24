@@ -50,7 +50,7 @@
             @auth('customerGuard')
             <li>
               <!-- Button trigger modal -->
-              <a type="" class="">
+              <a href="{{route('view.profile')}}" class="">
                 {{ auth('customerGuard')->user()->name }}
               </a>
             </li>

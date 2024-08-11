@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
+use App\Models\OrderDetail;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class OrderController extends Controller
 {
@@ -129,40 +132,65 @@ class OrderController extends Controller
     public function placeOrder(Request $request)
     {
 
-        //validation
+        // dd($request->all());
+        //step1 validation
+       $validation=Validator::make($request->all(),[
+        'receiver_name'=>'required',
+        'email'=>'required|email',
+        'address'=>'required',
+        'paymentMethod'=>'required|in:cod,online'
+        ]);
 
+    if($validation->fails())
+    {
+        notify()->error($validation->getMessageBag());
+       
+        return redirect()->back();
+    }
 
-
+        $cart=session()->get('basket');
+        
         //quary for store data into Orders table
-
+       
         $order=Order::create([
             'receiver_name'=>$request->receiver_name,
+            'receiver_email'=>$request->email,
+            'receiver_address'=>$request->address,
+            'receiver_mobile'=>'01616666666',
+            'payment_method'=>$request->paymentMethod,
             'customer_id'=>auth('customerGuard')->user()->id,
-
-
+            'total_amount'=>array_sum(array_column($cart,'subtotal'))
 
         ]);
 
-
-
         //quary for storing data into Order_details table
-            $cart=session()->get('basket');
-
-            foreach($cart as $singleData)
-            {
-                OrderDetail::create([
-                    'order_id'=>$order->id,
-                    'product_id'=>$singleData['product_id']
-
-
-
-                    
-                ]);
-            }
-
+           
+        foreach($cart as $singleData)
+        {
+          
+            OrderDetail::create([
+                'order_id'=>$order->id,
+                'product_id'=>$singleData['product_id'],
+                'product_unit_price'=>$singleData['price'],
+                'product_quantity'=>$singleData['quantity'],
+                'subtotal'=>$singleData['subtotal'],
+            ]);
+        }
+           
 
         notify()->success('Order place successfully.');
+        session()->forget('basket');
         return redirect()->route('home');
 
+    }
+
+    public function viewInvoice($order_id)
+    {
+       
+        $order=Order::with('orderDetails')->find($order_id);
+        
+
+       return view('frontend.pages.invoice',compact('order'));
+        
     }
 }

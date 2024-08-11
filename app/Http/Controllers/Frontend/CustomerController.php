@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
+use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Validator;
@@ -92,5 +93,13 @@ class CustomerController extends Controller
 
         notify()->success('logout success.');
         return redirect()->route('home');
+    }
+
+    public function viewProfile()
+    {
+
+        $orders=Order::where('customer_id',auth('customerGuard')->user()->id)->get();
+        
+        return view('frontend.pages.profile',compact('orders'));
     }
 }
