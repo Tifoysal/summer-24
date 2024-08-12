@@ -30,4 +30,20 @@ class ProductController extends Controller
       //method chaining
       return view('frontend.pages.single_product',compact('singleProduct','relatedProduct'));
     }
+
+    public function search()
+    {
+      // dd(request()->all());
+      // dd($request->all());
+
+      $products=Product::where('name','LIKE','%'.request()->search_key.'%')
+                          // ->OrWhere('price','LIKE','%'.request()->search_key.'%')
+                          ->get();
+
+      //where('column name','condition','%value%')
+
+      return view('frontend.pages.search',compact('products'));
+
+
+    }
 }

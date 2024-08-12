@@ -3,7 +3,11 @@
 @section('content')
 
 <div class="container">
-    <div class="card">
+<button class="btn btn-success" onClick="printReport()">Print</button>
+    
+<!-- print area suru -->
+
+    <div class="card" id="printArea">
         <div class="card-header">
             Invoice
             <strong>{{$order->created_at}}</strong>
@@ -102,12 +106,30 @@
                         </tbody>
                     </table>
 
+                  
+
                 </div>
 
             </div>
 
         </div>
     </div>
+
+    <!-- print area sesh -->
 </div>
 
+
+<script type="text/javascript">
+    function printReport()
+    {
+        var printContents = document.getElementById("printArea").innerHTML;
+			var originalContents = document.body.innerHTML;
+
+			document.body.innerHTML = printContents;
+
+			window.print();
+
+			document.body.innerHTML = originalContents;
+    }
+</script>
 @endsection
