@@ -14,7 +14,9 @@ class OrderController extends Controller
 
     public function orderList()
     {
-        return view('backend.order-list');
+        $orders=Order::with('customer')->get();
+        
+        return view('backend.order-list',compact('orders'));
     }
 
 
@@ -192,5 +194,30 @@ class OrderController extends Controller
 
        return view('frontend.pages.invoice',compact('order'));
         
+    }
+
+
+    public function report()
+    {
+       
+        // dd(request()->all());
+       
+        if(request()->has('from_date') && request()->has('to_date'))
+        {
+            // dd(request()->all());
+           // ar jodi filter kore taile filter kore dekhao
+           $orders=Order::with('customer')
+                    ->whereBetween('created_at',[request()->from_date,request()->to_date])
+                    ->get();
+        
+           return view('backend.order-report',compact('orders'));
+        }
+        // dd("sidebar e click korse");
+
+ // jodi sidebar e click kore taile sob dekhao
+        
+        $orders=Order::with('customer')->get();
+        
+        return view('backend.order-report',compact('orders'));
     }
 }

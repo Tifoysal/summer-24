@@ -64,7 +64,10 @@ Route::group(['prefix' => 'admin'], function () {
 
         Route::get('/contact-us', [ContactController::class, 'contact']);
 
-        Route::get('/order-list', [OrderController::class, 'orderList']);
+        Route::get('/order-list', [OrderController::class, 'orderList'])->name('admin.orders');
+        
+        Route::get('/report', [OrderController::class, 'report'])->name('admin.report');
+
 
         Route::get('/product-list', [ProductController::class, 'productList'])->name('product.list');
 

@@ -14,7 +14,7 @@
             </li>
             <li class="nav-item">
 
-              <a class="nav-link d-flex align-items-center gap-2" href="{{url('/order-list')}}">
+              <a class="nav-link d-flex align-items-center gap-2" href="{{route('admin.orders')}}">
                 <svg class="bi"><use xlink:href="#file-earmark"/></svg>
                 Orders
               </a>
@@ -43,7 +43,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link d-flex align-items-center gap-2" href="">
+              <a class="nav-link d-flex align-items-center gap-2" href="{{route('admin.report')}}">
                 <svg class="bi"><use xlink:href="#graph-up"/></svg>
                 Reports
               </a>
