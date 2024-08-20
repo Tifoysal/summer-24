@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\OrderEmail;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
 class OrderController extends Controller
@@ -181,7 +183,12 @@ class OrderController extends Controller
            
 
         notify()->success('Order place successfully.');
+
+        //send order confirmation email
         session()->forget('basket');
+
+        Mail::to($request->email)->send(new OrderEmail($order));
+
         return redirect()->route('home');
 
     }
