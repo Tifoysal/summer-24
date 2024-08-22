@@ -14,11 +14,19 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'customer_auth' => \App\Http\Middleware\CustomerAuth::class,
         ]);
+        $middleware->validateCsrfTokens(except: [
+            '/success',
+            '/cancel',
+            '/fail',
+            '/ipn',
+            '/pay-via-ajax',
+        ]);
     })
 
     ->withMiddleware(function (Middleware $middleware) {
         //
     })
+    
     ->withExceptions(function (Exceptions $exceptions) {
         //
     })->create();

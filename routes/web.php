@@ -6,6 +6,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\Frontend\CustomerController as FrontendCustomerController;
 use App\Http\Controllers\Frontend\HomeController as FrontendHomeController;
+use App\Http\Controllers\Frontend\PaymentController;
 use App\Http\Controllers\Frontend\ProductController as FrontendProductController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
@@ -43,6 +44,8 @@ Route::group(['middleware'=>'customer_auth'],function (){
     Route::get('/view-profile',[FrontendCustomerController::class,'viewProfile'])->name('view.profile');
 
     Route::get('/view-invoice/{order_id}',[OrderController::class,'viewInvoice'])->name('view.invoice');
+    Route::post('/success', [PaymentController::class, 'success']);
+
 });
 
 

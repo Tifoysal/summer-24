@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Frontend\PaymentController;
 use App\Mail\OrderEmail;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
+use Throwable;
 
 class OrderController extends Controller
 {
@@ -152,10 +155,13 @@ class OrderController extends Controller
         return redirect()->back();
     }
 
+    try{
         $cart=session()->get('basket');
         
         //quary for store data into Orders table
        
+        DB::beginTransaction();
+
         $order=Order::create([
             'receiver_name'=>$request->receiver_name,
             'receiver_email'=>$request->email,
@@ -180,16 +186,36 @@ class OrderController extends Controller
                 'subtotal'=>$singleData['subtotal'],
             ]);
         }
+
+        DB::commit();
+
+         //send order confirmation email
+         session()->forget('basket');
+
+         Mail::to($request->email)->send(new OrderEmail($order));
+
+
+        if($request->paymentMethod != 'cod')
+        {
+            //jodi cod na hoy thats mean online payment.
+            //call ssl commerz to pay
+            $payment=new PaymentController();
+
+            $payment->payNow($order);
+            
+        }
            
 
-        notify()->success('Order place successfully.');
+        
+    }catch(Throwable $exception){
 
-        //send order confirmation email
-        session()->forget('basket');
+        DB::rollBack();
+        notify()->error($exception->getMessage());
 
-        Mail::to($request->email)->send(new OrderEmail($order));
+        return redirect()->back();
+    }
 
-        return redirect()->route('home');
+       
 
     }
 
