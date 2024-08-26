@@ -12,19 +12,19 @@
                     <div class="col-md-6">
                         <img class="card-img-top mb-5 mb-md-0" src="{{url('/uploads/'.$singleProduct->image)}}" alt="product image" style="width: 300px;"></div>
                     <div class="col-md-6">
-                        <div class="small mb-1">SKU: BST-498</div>
+                        <!-- <div class="small mb-1">SKU: BST-498</div> -->
                         <h1 class="display-5 fw-bolder">{{$singleProduct->name}}</h1>
                         <div class="fs-5 mb-5">
                             <span class="text-decoration-line-through">{{$singleProduct->price}} .BDT</span>
-                           
+                           <p>{{$singleProduct->stock}} available</p>
                         </div>
                         <p class="lead">description here</p>
                         <div class="d-flex">
                             <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem">
-                            <button class="btn btn-outline-dark flex-shrink-0" type="button">
+                            <a class="btn btn-outline-dark flex-shrink-0" href="{{route('add.to.cart',$singleProduct->id)}}">
                                 <i class="bi-cart-fill me-1"></i>
                                 Add to cart
-                            </button>
+                            </a>
                         </div>
                     </div>
                 </div>

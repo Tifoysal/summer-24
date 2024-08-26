@@ -13,6 +13,7 @@
       <th scope="col">Product Image</th>
       <th scope="col">Product Name</th>
       <th scope="col">Price</th>
+      <th scope="col">Stock</th>
       <th scope="col">Category Name</th>
       <th scope="col">Action</th>
     </tr>
@@ -27,6 +28,7 @@
       </td>
       <td>{{$product->name}}</td>
       <td>{{$product->price}} BDT</td>
+      <td>{{$product->stock}}</td>
       <td>{{$product->category->name}}</td>
       <td>
         <a href="{{route('product.view',$product->id)}}" class="btn btn-primary">View</a>

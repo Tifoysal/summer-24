@@ -31,6 +31,13 @@
   </div>
 
 
+
+  <div class="form-group">
+    <label for="p_price">Enter Product Stock:</label>
+    <input required name="product_stock" type="number" class="form-control" id="p_price" placeholder="Enter product stock">
+  </div>
+
+
   <div class="form-group">
     <label for="image">Upload Product Image:</label>
     <input name="product_image" type="file" class="form-control" id="image" placeholder="Upload product image">

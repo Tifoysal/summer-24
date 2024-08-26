@@ -275,9 +275,10 @@ input[type=text]:placeholder {
     <!-- Tabs Titles -->
 
     <!-- Icon -->
-    <div class="fadeIn first">
-      <img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="User Icon" />
-    </div>
+    <div class="" style="text-align: center;">
+    <img style="margin-left: 89px;" src="https://static.vecteezy.com/system/resources/previews/019/896/008/original/male-user-avatar-icon-in-flat-design-style-person-signs-illustration-png.png" id="icon" alt="User Icon" />
+</div>
+
 
     <!-- Login Form -->
     <form action="{{route('do.login')}}" method="post">

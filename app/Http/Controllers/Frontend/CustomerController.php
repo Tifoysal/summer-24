@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
 use App\Models\Order;
+use App\Models\OrderDetail;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Validator;
@@ -101,5 +103,29 @@ class CustomerController extends Controller
         $orders=Order::where('customer_id',auth('customerGuard')->user()->id)->get();
         
         return view('frontend.pages.profile',compact('orders'));
+    }
+
+    public function cancelOrder($id)
+    {
+       
+        $order=Order::find($id);
+        
+        $order->update([
+            'status'=>'cancel'
+        ]);
+
+        $items=OrderDetail::where('order_id',$id)->get();
+       foreach($items as $item)
+       {
+        $product=Product::find($item->product_id);
+
+        $product->increment('stock',$item->product_quantity);
+       }
+
+
+
+        notify()->success('Order cancelled.');
+        return redirect()->back();
+
     }
 }

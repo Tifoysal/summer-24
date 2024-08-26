@@ -28,7 +28,7 @@
               <div class="d-flex flex-column mb-4 lead">
                 <span class="mb-2">{{$prod->price}} BDT</span>
                 
-                <span style="color: transparent;">0</span>
+                <p style="">Stock : {{$prod->stock}}</p>
               </div>
             </div>
 

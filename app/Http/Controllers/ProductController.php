@@ -39,7 +39,8 @@ class ProductController extends Controller
             'product_name'=>'required',
             'product_price'=>'required|numeric|min:10',
             'product_image'=>'required|file|max:1024',
-            'category_id'=>'required'
+            'category_id'=>'required',
+            'product_stock'=>'required'
         ]);
 
         if($validation->fails())
@@ -68,6 +69,7 @@ class ProductController extends Controller
         'name'=>$request->product_name,
         'price'=>$request->product_price,
         'image'=>$fileName,
+        'stock'=>$request->product_stock,
         'category_id'=>$request->category_id
        ]);
 

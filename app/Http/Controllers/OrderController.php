@@ -185,6 +185,10 @@ class OrderController extends Controller
                 'product_quantity'=>$singleData['quantity'],
                 'subtotal'=>$singleData['subtotal'],
             ]);
+
+            //decrement stock 
+            $product=Product::find($singleData['product_id']);
+            $product->decrement('stock',$singleData['quantity']);
         }
 
         DB::commit();

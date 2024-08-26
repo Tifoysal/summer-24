@@ -17,6 +17,7 @@ return new class extends Migration
             $table->double('price',10,2);
             $table->string('image')->nullable();
             $table->integer('category_id');
+            $table->integer('stock');
             //image/any file will store in filesystem- then that path
             //will store in database
 
