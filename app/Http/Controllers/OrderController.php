@@ -29,6 +29,8 @@ class OrderController extends Controller
     {
         
         $product=Product::find($pId);
+        if($product->stock > 0)
+        {
         $myCart=session()->get('basket');
         // dd($myCart);
         //step 1: cart empty
@@ -56,6 +58,9 @@ class OrderController extends Controller
                 // dd($myCart[$pId]);
                 //step 2: quantity update, subtotal update
                //q=1,sub=300
+               if($product->stock > $myCart[$pId]['quantity'])
+               {
+                
                 $myCart[$pId]['quantity'] = $myCart[$pId]['quantity'] + 1;
                 $myCart[$pId]['subtotal'] = $myCart[$pId]['quantity'] * $myCart[$pId]['price'];
 
@@ -63,6 +68,10 @@ class OrderController extends Controller
 
                 notify()->success('Quantity updated.');
                 return redirect()->back();
+               }else{
+                notify()->error('Quantity not available.');
+                return redirect()->back();
+               }
 
 
             }
@@ -82,7 +91,13 @@ class OrderController extends Controller
                 notify()->success("Product Added to Cart");
                 return redirect()->back();
             }
+        } 
+        }else{
+            notify()->error('Stock not available.');
+            return redirect()->back();
         }
+
+       
     }
 
     public function viewCart()
@@ -256,5 +271,28 @@ class OrderController extends Controller
         $orders=Order::with('customer')->get();
         
         return view('backend.order-report',compact('orders'));
+    }
+
+    public function updateCart(Request $request,$id)
+    {
+        $cart=session()->get('basket');
+        $product=Product::find($id);
+
+        if($product->stock >= $request->quantity)
+        {
+            $cart[$id]['quantity']=$request->quantity;
+            $cart[$id]['subtotal']=$request->quantity * $cart[$id]['price'];
+    
+            session()->put('basket',$cart);
+            notify()->success('Cart updated.');
+            return redirect()->back();
+        }else
+        {
+            notify()->error('stock not available');
+            return redirect()->back();
+        }
+       
+
+
     }
 }

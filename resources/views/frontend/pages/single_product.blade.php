@@ -21,10 +21,20 @@
                         <p class="lead">description here</p>
                         <div class="d-flex">
                             <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem">
-                            <a class="btn btn-outline-dark flex-shrink-0" href="{{route('add.to.cart',$singleProduct->id)}}">
+                           
+                            @if($singleProduct->stock>0)
+                            <a class="btn btn-success" href="{{route('add.to.cart',$singleProduct->id)}}">
                                 <i class="bi-cart-fill me-1"></i>
                                 Add to cart
                             </a>
+                            @else
+
+                            <a disabled class="btn btn-success" href="">
+                                <i class="bi-cart-fill me-1"></i>
+                                Add to cart
+                            </a>
+                        @endif
+
                         </div>
                     </div>
                 </div>

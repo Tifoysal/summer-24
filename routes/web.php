@@ -30,6 +30,8 @@ Route::get('/add-to-cart/{productId}',[OrderController::class, 'addToCart'])->na
 
 Route::get('/view-cart',[OrderController::class, 'viewCart'])->name('view.cart');
 
+Route::post('/update-cart/{pid}',[OrderController::class,'updateCart'])->name('update.cart');
+
 Route::get('/clear-cart',[OrderController::class, 'clearCart'])->name('cart.clear');
 
 Route::get('/cart/item/delete/{id}',[OrderController::class, 'cartItemDelete'])->name('cart.item.delete');

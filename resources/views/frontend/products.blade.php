@@ -28,14 +28,24 @@
               <div class="d-flex flex-column mb-4 lead">
                 <span class="mb-2">{{$prod->price}} BDT</span>
                 
-                <p style="">Stock : {{$prod->stock}}</p>
+                <p>Stock : {{$prod->stock >0 ?  $prod->stock : 'out of stock'}}</p>
+
               </div>
             </div>
 
             <div class="d-flex flex-row">
+              @if($prod->stock > 0)
               <a href="{{route('add.to.cart',$prod->id)}}" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary flex-fill me-1" data-mdb-ripple-color="dark">
                 Add to cart
               </a>
+              @else
+
+              <a disabled href="" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary flex-fill me-1" data-mdb-ripple-color="dark">
+                Add to cart
+              </a>
+
+              @endif
+
               <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-danger flex-fill ms-1">Buy now</button>
             </div>
 
