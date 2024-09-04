@@ -31,6 +31,13 @@
   </div>
 
 
+  <div class="form-group">
+    <label for="p_price">Enter Product Discount (%):</label>
+    <input name="product_discount" type="text" class="form-control" id="p_price" placeholder="Enter product Discount">
+  </div>
+
+
+
 
   <div class="form-group">
     <label for="p_price">Enter Product Stock:</label>

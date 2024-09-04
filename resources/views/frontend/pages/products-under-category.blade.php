@@ -6,7 +6,7 @@
 <section style="background-color: #eee;">
  
   <div class="container py-5">
-    <div class="row">
+    <div class="row"> <h1>Products under categorys</h1>
 
     @foreach ($products as $prod )
        
@@ -19,10 +19,6 @@
             <div class="text-center mt-1">
               <h4 class="card-title">{{$prod->name}}</h4>
               
-              @if($prod->discount>0)
-              <span class="badge badge-success">{{$prod->discount}}%</span>
-              @endif
-              
             </div>
 
             <div class="text-center">
@@ -31,14 +27,8 @@
               </div>
               
               <div class="d-flex flex-column mb-4 lead">
-
-              @if($prod->discount>0)
-                <span class="mb-2"><del>{{$prod->price}} BDT</del></span>
-                <span class="mb-2">{{$prod->price - ($prod->price/$prod->discount)}} BDT</span>
-                @else
                 <span class="mb-2">{{$prod->price}} BDT</span>
-                @endif
-
+                
                 <p>Stock : {{$prod->stock >0 ?  $prod->stock : 'out of stock'}}</p>
 
               </div>

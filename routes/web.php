@@ -11,6 +11,7 @@ use App\Http\Controllers\Frontend\ProductController as FrontendProductController
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\WishListController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -38,6 +39,8 @@ Route::get('/cart/item/delete/{id}',[OrderController::class, 'cartItemDelete'])-
 
 Route::get('/search',[FrontendProductController::class,'search'])->name('search');
 
+Route::get('/products-under-category/{category_id}',[FrontendHomeController::class,'productsUnderCategory'])->name('products.under.category');
+
 Route::group(['middleware'=>'customer_auth'],function (){
     Route::get('/logout',[FrontendCustomerController::class,'logout'])->name('customer.logout');
     Route::get('/checkout',[OrderController::class, 'checkout'])->name('checkout');
@@ -48,6 +51,8 @@ Route::group(['middleware'=>'customer_auth'],function (){
 
     Route::get('/view-invoice/{order_id}',[OrderController::class,'viewInvoice'])->name('view.invoice');
     Route::post('/success', [PaymentController::class, 'success']);
+
+    Route::get('/add-to-wishlist/{product_id}',[WishListController::class,'addToWishList'])->name('add.wishlist');
 
 });
 
@@ -65,6 +70,8 @@ Route::group(['prefix' => 'admin'], function () {
     Route::group(['middleware' => 'auth'], function () {
 
         Route::get('/', [HomeController::class, 'home'])->name('dashboard');
+
+        Route::post('/set-alert-stock',[ProductController::class,'setAlertStock'])->name('set.alert.stock');
 
         Route::get('/logout', [AuthenticationController::class, 'logout'])->name('logout');
 

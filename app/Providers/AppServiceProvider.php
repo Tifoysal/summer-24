@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Category;
+use App\Models\WishList;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
@@ -30,7 +31,7 @@ class AppServiceProvider extends ServiceProvider
             $all_categories=Category::all();
         }
 
-       
+      
         view()->share('categories',$all_categories);
     }
 }

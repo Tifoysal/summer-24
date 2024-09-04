@@ -14,6 +14,7 @@ class ProductController extends Controller
     public function productList(){
 
        $allProduct=Product::with('category')->paginate(5);
+     
     //    dd($allProduct);
 
         return view('backend.product-list',compact('allProduct'));
@@ -40,7 +41,8 @@ class ProductController extends Controller
             'product_price'=>'required|numeric|min:10',
             'product_image'=>'required|file|max:1024',
             'category_id'=>'required',
-            'product_stock'=>'required'
+            'product_stock'=>'required',
+            'product_discount'=>'nullable|numeric',
         ]);
 
         if($validation->fails())
@@ -68,6 +70,7 @@ class ProductController extends Controller
        Product::create([
         'name'=>$request->product_name,
         'price'=>$request->product_price,
+        'discount'=>$request->product_discount,
         'image'=>$fileName,
         'stock'=>$request->product_stock,
         'category_id'=>$request->category_id
@@ -127,4 +130,13 @@ class ProductController extends Controller
 
 
     }
+
+    public function setAlertStock(Request $request){
+       
+
+        session()->put('alert',$request->alert_qty);
+        return redirect()->back();
+    }
+
+
 }
