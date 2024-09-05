@@ -111,7 +111,7 @@
 
           <a href="index.html">
 
-            <img src="images/logo.png" alt="Orani E-shop">
+            <img src="{{url('/uploads/logo/'.$setting->logo)}}" alt="Orani E-shop">
 
           </a>
 

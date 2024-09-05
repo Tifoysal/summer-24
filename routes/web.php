@@ -100,5 +100,8 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/category-form', [CategoryController::class, 'form'])->name('category.form');
 
         Route::post('/category-store', [CategoryController::class, 'store'])->name('category.store');
+
+        Route::get('/business-settings',[HomeController::class,'settings'])->name('admin.business.settings');
+        Route::post('/business-settings',[HomeController::class,'settingSubmit'])->name('settings.submit');
     });
 });

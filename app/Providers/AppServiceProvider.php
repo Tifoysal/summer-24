@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Category;
+use App\Models\Setting;
 use App\Models\WishList;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Schema;
@@ -29,9 +30,11 @@ class AppServiceProvider extends ServiceProvider
         if(Schema::hasTable('categories'))
         {
             $all_categories=Category::all();
+            $app_setting=Setting::find(1);
         }
 
       
         view()->share('categories',$all_categories);
+        view()->share('setting',$app_setting);
     }
 }
