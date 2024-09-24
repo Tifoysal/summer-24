@@ -11,7 +11,7 @@ class HomeController extends Controller
 {
     public function home()
     {
-      
+        // app()->setLocale('bn');
         return view("frontend.home");    
     }
 
@@ -23,5 +23,13 @@ class HomeController extends Controller
 
        return view('frontend.pages.products-under-category',compact('products'));
 
+    }
+
+    public function changeLang($langName)
+    {
+
+       session()->put('locale',$langName);
+
+        return redirect()->back();
     }
 }

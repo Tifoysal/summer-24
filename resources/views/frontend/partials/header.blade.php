@@ -87,6 +87,17 @@
         </div>
 
             </li>
+
+            <li>
+              <select onchange="location = this.options[this.selectedIndex].value;" name="" id="" class="form-control">
+                <option  @if(session()->get('locale')=='bn') selected @endif value="{{route('change.lang','bn')}}">Bangla
+                </option>
+                <option  @if(session()->get('locale')=='en') selected @endif value="{{route('change.lang','en')}}">English
+                </option>
+                <option  @if(session()->get('locale')=='ar') selected @endif value="{{route('change.lang','ar')}}">Arabic
+                </option>
+              </select>
+            </li>
           </ul>
 
         </div>
@@ -127,7 +138,7 @@
 
             <div class="form-group">
 
-              <input name="search_key" value="{{request()->search_key}}" type="text" class="form-control" placeholder="Search here">
+              <input name="search_key" value="{{request()->search_key}}" type="text" class="form-control" placeholder="{{__('Search here')}}">
 
             </div>
 
@@ -234,7 +245,7 @@
 
           <button type="button" class="btn btn-shop-category dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
-            Shop By Category <span class="caret"></span>
+            {{__('SHOP BY CATEGORY')}}  <span class="caret"></span>
 
           </button>
 
