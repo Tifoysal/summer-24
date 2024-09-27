@@ -99,6 +99,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/customer-list', [CustomerController::class, 'customerList'])->name('customer.list');
 
         Route::get('/category-list', [CategoryController::class, 'list'])->name('category.list');
+        Route::get('/category-delete/{category_id}', [CategoryController::class, 'delete'])->name('category.delete');
 
         Route::get('/category-form', [CategoryController::class, 'form'])->name('category.form');
 

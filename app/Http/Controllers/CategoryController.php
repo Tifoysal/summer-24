@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Throwable;
 
 class CategoryController extends Controller
 {
@@ -47,6 +48,24 @@ class CategoryController extends Controller
         ]);
 
         return redirect()->back();
+
+    }
+
+    public function delete($id)
+    {
+
+        try{
+            $category=Category::find($id);
+            $category->delete();
+    
+            notify()->success('Category deleted.');
+            return redirect()->back();
+        }catch(Throwable $ex)
+        {
+            notify()->error('Category has product.');
+            return redirect()->back();
+        }
+        
 
     }
 }
