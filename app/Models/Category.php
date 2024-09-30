@@ -10,4 +10,9 @@ class Category extends Model
     use HasFactory;
     // protected $fillable = ['title'];
     protected $guarded = [];
+
+    public function parent() 
+    {
+        return $this->hasOne(Category::class,'id','parent_id');    
+    }
 }

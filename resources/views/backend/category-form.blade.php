@@ -13,6 +13,16 @@
     <input name="cat_name" required type="text" class="form-control" id="name" placeholder="Enter Category Name">
   </div>
 
+  <div class="form-group">
+    <label for="name">Select Category Parent</label>
+    <select name="parent_id" id="" class="form-control">
+      <option value="">--Select Parent--</option>
+      @foreach($allCategory as $category)
+      <option value="{{$category->id}}">{{$category->name}}</option>
+      @endforeach
+    </select>
+  </div>
+
   <div class="form-group" style="margin-top: 10px;">
     <label for="name">Enter Description</label>
    <textarea class="form-control" name="cat_description" id="" placeholder="Enter Description"></textarea>

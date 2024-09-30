@@ -12,14 +12,17 @@ class CategoryController extends Controller
     public function list()
     {
         
-        $allCategory=Category::paginate(5);
+        $allCategory=Category::with('parent')->paginate(20);
+
+        // dd($allCategory);
        
        return view('backend.category-list',compact('allCategory'));   
     }
 
     public function form()
     {
-        return view('backend.category-form');    
+        $allCategory=Category::all();
+        return view('backend.category-form',compact('allCategory'));    
     }
 
     public function store(Request $request)
@@ -41,13 +44,27 @@ class CategoryController extends Controller
 
         //lets store data into database
 
-        Category::create([
-            //bam pase table er column name => dan pase input field er name
-            'name'=>$request->cat_name,
-            'description'=>$request->cat_description
-        ]);
+        try
+        {
+            Category::create([
+                //bam pase table er column name => dan pase input field er name
+                'name'=>$request->cat_name,
+                'slug'=>str()->slug($request->cat_name),
+                'parent_id'=>$request->parent_id,
+                'description'=>$request->cat_description
+            ]);
+    
+            return redirect()->back();
 
-        return redirect()->back();
+        }catch(Throwable $e)
+        {
+            // notify()->error('Something went wrong');
+            notify()->error($e->getMessage());
+
+            return redirect()->back();
+
+        }
+      
 
     }
 

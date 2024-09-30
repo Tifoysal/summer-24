@@ -12,6 +12,8 @@
     <tr>
       <th scope="col">#</th>
       <th scope="col">Category Name</th>
+      <th scope="col">Category Parent</th>
+      <th scope="col">Category Slug</th>
       <th scope="col">Description</th>
       <th scope="col">Status</th>
       <th scope="col">Action</th>
@@ -25,6 +27,9 @@
 <tr>
       <th scope="row">{{$cat->id}}</th>
       <td>{{$cat->name}}</td>
+      <td>{{optional($cat->parent)->name}}</td>
+      <!-- <td>{{is_null($cat->parent) ? 'null' : $cat->parent->name}}</td> -->
+      <td>{{$cat->slug}}</td>
       <td>{{$cat->description}}</td>
       <td>{{$cat->status}}</td>
       <td>

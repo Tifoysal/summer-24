@@ -29,7 +29,7 @@ class AppServiceProvider extends ServiceProvider
 
         if(Schema::hasTable('categories'))
         {
-            $all_categories=Category::all();
+            $all_categories=Category::where('parent_id',null)->get();
             $app_setting=Setting::find(1);
         }
 

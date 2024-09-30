@@ -1,3 +1,56 @@
+<style>
+  .no-padding{
+  padding:0px;
+}
+.glyphicon-icon-rpad .glyphicon,.glyphicon-icon-rpad .glyphicon.m8,.fa-icon-rpad .fa,.fa-icon-rpad .fa.m8{ padding-right:8px; }
+.glyphicon-icon-lpad .glyphicon,.glyphicon-icon-lpad .glyphicon.m8,.fa-icon-lpad .fa,.fa-icon-lpad .fa.m8{ padding-left:8px; }
+.glyphicon-icon-rpad .glyphicon.m5,.fa-icon-rpad .fa.m5{ padding-right:5px; }
+.glyphicon-icon-lpad .glyphicon.m5,.fa-icon-lpad .fa.m5{ padding-left:5px; }
+.glyphicon-icon-rpad .glyphicon.m12,.fa-icon-rpad .fa.m12{ padding-right:12px; }
+.glyphicon-icon-lpad .glyphicon.m12,.fa-icon-lpad .fa.m12{ padding-left:12px; }
+.glyphicon-icon-rpad .glyphicon.m15,.fa-icon-rpad .fa.m15{ padding-right:15px; }
+.glyphicon-icon-lpad .glyphicon.m15,.fa-icon-lpad .fa.m15{ padding-left:15px; }
+
+
+
+ul.nav-menu-list-style .nav-header .menu-collapsible-icon{position:absolute; right:3px; top:16px; font-size:9px; }
+
+
+
+ul.nav-menu-list-style{
+  margin:0;
+}
+ul.nav-menu-list-style .nav-header{
+  border-top:1px solid #FFFFFF;
+  border-bottom:1px solid #e8e8e8;
+  display:block;
+  margin:0;
+  line-height:42px;
+  padding:0 8px;
+  font-weight:600;
+}
+ul.nav-menu-list-style> li{
+  position:relative; }
+ul.nav-menu-list-style> li a{
+  border-top:1px solid #FFFFFF;
+  border-bottom:1px solid #e8e8e8;
+  padding:0 10px;
+  line-height:32px;
+}
+ul.nav-menu-list-style> li:first-child a{
+}
+
+
+ul.nav-menu-list-style{list-style:none; padding:0px; margin:0px;}
+ul.nav-menu-list-style li .badge,ul.nav-menu-list-style li .pull-right,ul.nav-menu-list-style li span.badge,ul.nav-menu-list-style li label.badge{float:right; margin-top:7px;}
+ul.bullets{list-style:inside disc}
+ul.numerics{list-style:inside decimal}
+.ul.kas-icon-aero{}
+ul.kas-icon-aero li a:before{font-family: 'Glyphicons Halflings'; font-size:9px; content: "\e258"; padding-right:8px; }
+
+
+</style>
+<script href="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 <div class="top-bar">
 
   <div class="container">
@@ -249,18 +302,81 @@
 
           </button>
 
-          <ul class="dropdown-menu">
+          <div class="container">
+  <div class="row">
+    <h1>Bootstrap Tree Menu Example</h1>
+  </div>
+</div>
+<div class="container">
+<div class="row">
+  <div class="col-md-3">
+    <div class="well no-padding">
+        <div>
+            <ul class="nav nav-list nav-menu-list-style">
+                <li><label class="tree-toggle nav-header glyphicon-icon-rpad"><span class="glyphicon glyphicon-folder-close m5"></span>Bootstrap
+                            <span class="menu-collapsible-icon glyphicon glyphicon-chevron-down"></span></label>
+                    <ul class="nav nav-list tree bullets">
+                        <li><a href="#">JavaScript</a></li>
+                        <li><a href="#">CSS <span class="badge">42</span></a></li>
+                        <li><label class="tree-toggle nav-header">Buttons</label>
+                            <ul class="nav nav-list tree">
+                                <li><a href="#">Colors</a></li>
+                                <li><a href="#">Sizes</a></li>
+                                <li><label class="tree-toggle nav-header">Forms</label>
+                                    <ul class="nav nav-list tree">
+                                        <li><a href="#">Horizontal</a></li>
+                                        <li><a href="#">Vertical</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li class="divider"></li>
+                <li><label class="tree-toggle nav-header">Responsive</label>
+                    <ul class="nav nav-list tree">
+                        <li><a href="#">Overview</a></li>
+                        <li><a href="#">CSS</a></li>
+                        <li><label class="tree-toggle nav-header">Media Queries</label>
+                            <ul class="nav nav-list tree">
+                                <li><a href="#">Text</a></li>
+                                <li><a href="#">Images</a></li>
+                                <li><label class="tree-toggle nav-header">Mobile Devices</label>
+                                    <ul class="nav nav-list tree">
+                                        <li><a href="#">iPhone</a></li>
+                                        <li><a href="#">Samsung</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><label class="tree-toggle nav-header">Coding</label>
+                            <ul class="nav nav-list tree">
+                                <li><a href="#">JavaScript</a></li>
+                                <li><a href="#">jQuery</a></li>
+                                <li><label class="tree-toggle nav-header">HTML DOM</label>
+                                    <ul class="nav nav-list tree">
+                                        <li><a href="#">DOM Elements</a></li>
+                                        <li><a href="#">Recursive</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    </div>
+    </div>
+</div>
 
-            @foreach ($categories as $cat)
-
-
-            <li><a href="{{route('products.under.category',$cat->id)}}">{{$cat->name}}</a></li>
-
-
-            @endforeach
-
-
-          </ul>
+<script>
+  $('.tree-toggle').click(function () {	$(this).parent().children('ul.tree').toggle(200);
+});
+$(function(){
+$('.tree-toggle').parent().children('ul.tree').toggle(200);
+})
+</script>
 
         </div>
 
