@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 
 
-//for website
+//for frontend
 
 Route::group(['middleware' => 'changeLangMiddleware'], function () {
 
