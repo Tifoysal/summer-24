@@ -78,7 +78,7 @@ Route::group(['prefix' => 'admin'], function () {
 
         Route::get('/logout', [AuthenticationController::class, 'logout'])->name('logout');
 
-        Route::get('/contact-us', [ContactController::class, 'contact']);
+        Route::get('/contact-us', [ContactController::class, 'contact'])->name('contact');
 
         Route::get('/order-list', [OrderController::class, 'orderList'])->name('admin.orders');
 
@@ -107,5 +107,6 @@ Route::group(['prefix' => 'admin'], function () {
 
         Route::get('/business-settings', [HomeController::class, 'settings'])->name('admin.business.settings');
         Route::post('/business-settings', [HomeController::class, 'settingSubmit'])->name('settings.submit');
+        Route::post('/rugi-settings', [HomeController::class, 'rugi'])->name('settings.rugi');
     });
 });
