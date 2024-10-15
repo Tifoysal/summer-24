@@ -49,6 +49,12 @@
               </a>
             </li>
             <li class="nav-item">
+              <a class="nav-link d-flex align-items-center gap-2" href="{{route('admin.role')}}">
+                <svg class="bi"><use xlink:href="#graph-up"/></svg>
+                Role
+              </a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link d-flex align-items-center gap-2" href="{{route('admin.business.settings')}}">
                 <svg class="bi"><use xlink:href="#graph-up"/></svg>
                 Business Settings

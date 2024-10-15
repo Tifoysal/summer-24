@@ -11,6 +11,7 @@ use App\Http\Controllers\Frontend\ProductController as FrontendProductController
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\WishListController;
 use Illuminate\Support\Facades\Route;
 
@@ -73,6 +74,12 @@ Route::group(['prefix' => 'admin'], function () {
     Route::group(['middleware' => 'auth'], function () {
 
         Route::get('/', [HomeController::class, 'home'])->name('dashboard');
+        Route::get('/role', [RoleController::class, 'role'])->name('admin.role');
+        Route::get('/role/form', [RoleController::class, 'roleForm'])->name('admin.role.form');
+        Route::post('/role/create', [RoleController::class, 'roleCreate'])->name('admin.role.store');
+        Route::post('/role/delete', [RoleController::class, 'roleDelete'])->name('admin.role.delete');
+        Route::get('/role/permissions/{role_id}', [RoleController::class, 'showPermission'])->name('admin.permission');
+        Route::post('/role/permissions/assign/{role_id}', [RoleController::class, 'assignPermission'])->name('admin.permission.assign');
 
         Route::post('/set-alert-stock', [ProductController::class, 'setAlertStock'])->name('set.alert.stock');
 
