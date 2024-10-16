@@ -90,6 +90,8 @@ class RoleController extends Controller
 
         try {
 
+            RolePermission::where('role_id',$role_id)->delete();
+
             foreach($request->permission as $permission_id)
             {
                 RolePermission::create([

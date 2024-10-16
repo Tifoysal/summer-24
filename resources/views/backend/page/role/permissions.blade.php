@@ -10,7 +10,7 @@
   @csrf
   @foreach($permissions as $p)
   <div class="form-group">
-    <label for="">{{$p->name}}</label>
+    <label for="">{{ucfirst($p->name)}}</label>
     <input @if(in_array($p->id,$rolePermissions)) checked @endif type="checkbox" name="permission[]" value="{{$p->id}}">
   </div>
 

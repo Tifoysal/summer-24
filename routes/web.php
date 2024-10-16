@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthenticationController;
+use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CustomerController;
@@ -115,5 +116,9 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/business-settings', [HomeController::class, 'settings'])->name('admin.business.settings');
         Route::post('/business-settings', [HomeController::class, 'settingSubmit'])->name('settings.submit');
         Route::post('/rugi-settings', [HomeController::class, 'rugi'])->name('settings.rugi');
+
+
+        Route::resource('users',UserController::class);
+
     });
 });
