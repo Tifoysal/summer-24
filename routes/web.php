@@ -72,7 +72,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/do-login', [AuthenticationController::class, 'doLogin'])->name('do.login');
 
 
-    Route::group(['middleware' => 'auth'], function () {
+    Route::group(['middleware' => ['auth','check_permission']], function () {
 
         Route::get('/', [HomeController::class, 'home'])->name('dashboard');
         Route::get('/role', [RoleController::class, 'role'])->name('admin.role');
@@ -103,7 +103,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/product/edit/{sojibId}', [ProductController::class, 'edit'])->name('product.edit');
 
         Route::post('/product/update/{paglaID}', [ProductController::class, 'update'])->name('product.update');
-
+ 
         Route::get('/customer-list', [CustomerController::class, 'customerList'])->name('customer.list');
 
         Route::get('/category-list', [CategoryController::class, 'list'])->name('category.list');

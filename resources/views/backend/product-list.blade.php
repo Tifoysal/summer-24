@@ -6,7 +6,9 @@
 
   <div class="col-md-6">
     <h1>Product List</h1>
+    @if(checkPermission('product.create'))
     <a class="btn btn-success" href="{{route('product.create')}}">Create new product</a>
+    @endif
   </div>
 
   <div class="col-md-6">
