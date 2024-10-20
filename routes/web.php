@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 //for frontend
 
-Route::group(['middleware' => 'changeLangMiddleware'], function () {
+Route::group(['middleware' => 'changeLang'], function () {
 
     Route::get('/', [FrontendHomeController::class, 'home'])->name('home');
 
@@ -46,6 +46,9 @@ Route::group(['middleware' => 'changeLangMiddleware'], function () {
     Route::get('/search', [FrontendProductController::class, 'search'])->name('search');
 
     Route::get('/products-under-category/{category_id}', [FrontendHomeController::class, 'productsUnderCategory'])->name('products.under.category');
+
+    Route::get('/otp',[FrontendHomeController::class,'otpPage'])->name('otp.page');
+    Route::post('/otp-submit',[FrontendHomeController::class,'otpSubmit'])->name('otp.submit');
 
     Route::group(['middleware' => 'customer_auth'], function () {
         Route::get('/logout', [FrontendCustomerController::class, 'logout'])->name('customer.logout');

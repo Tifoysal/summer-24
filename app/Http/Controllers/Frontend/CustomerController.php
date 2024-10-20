@@ -53,8 +53,6 @@ class CustomerController extends Controller
 
     public function customerLogin(Request $request)
     {
-
-       
        //step1 validation
        $validation=Validator::make($request->all(),[
         'email'=>'required|email',
@@ -73,12 +71,24 @@ class CustomerController extends Controller
        $credentials=$request->except('_token');
        
        $check=auth('customerGuard')->attempt($credentials);
+
     //    $check=Auth::guard('customerGuard')->attempt($credentials)
 
-       if($check){
-        notify()->success('Login Success');
+       if($check ){
+        $customer=auth('customerGuard')->user();
+
+        if($customer->is_email_verified==true)
+        {
+            notify()->success('Login Success');
        
-        return redirect()->route('home');
+            return redirect()->route('home');
+        }else{
+
+            auth('customerGuard')->logout();
+            notify()->error('Account Not verified');
+            return redirect()->route('otp.page');
+        }
+        
        }else
        {
         notify()->error('Login failed.');

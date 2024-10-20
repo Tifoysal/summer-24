@@ -32,4 +32,10 @@ class HomeController extends Controller
 
         return redirect()->back();
     }
+
+    public function otpPage()
+    {
+        
+        return view('frontend.pages.otp');
+    }
 }
