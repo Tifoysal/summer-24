@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::table('customers', function (Blueprint $table) {
             $table->string('otp',6)->nullable();
+            $table->datetime('otp_expired_at')->nullable();
             $table->boolean('is_email_verified')->default(false);
             $table->boolean('is_mobile_verified')->default(false);
         });

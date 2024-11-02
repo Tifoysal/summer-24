@@ -48,7 +48,10 @@ Route::group(['middleware' => 'changeLang'], function () {
     Route::get('/products-under-category/{category_id}', [FrontendHomeController::class, 'productsUnderCategory'])->name('products.under.category');
 
     Route::get('/otp',[FrontendHomeController::class,'otpPage'])->name('otp.page');
+    Route::get('/resend-otp/{email}',[FrontendHomeController::class,'otpResend'])->name('otp.resend');
     Route::post('/otp-submit',[FrontendHomeController::class,'otpSubmit'])->name('otp.submit');
+
+
 
     Route::group(['middleware' => 'customer_auth'], function () {
         Route::get('/logout', [FrontendCustomerController::class, 'logout'])->name('customer.logout');

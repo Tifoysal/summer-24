@@ -12,9 +12,11 @@
 		<!-- Login Form -->
 		<form action="{{route('otp.submit')}}" method="post">
 			@csrf
+			<label for="">{{$email}}</label>
+			<input type="hidden" value="{{$email}}" name="email">
 			<input type="number" id="otp" class="fadeIn second form-control" name="otp" placeholder="Enter OTP">
-			<a href="">Resend OTP</a>
-			<input type="submit" class="btn btn-success active" style="margin: 5px;" value="Log In">
+			<a href="{{route('otp.resend',$email)}}">Resend OTP</a>
+			<input type="submit" class="btn btn-success active" style="margin: 5px;" value="Submit">
 			</form>
 	</div>
 </div>

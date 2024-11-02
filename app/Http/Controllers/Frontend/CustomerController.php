@@ -34,10 +34,13 @@ class CustomerController extends Controller
         }
 
        // query
+        $otp=rand(100000,999999);
 
        Customer::create([
         //bam pase column name=>dan pase value (form input)
         'name'=>$request->customer_name,
+        'otp'=>$otp,
+        'otp_expired_at'=>now()->addMinutes(3),
         'email'=>$request->email,
         'password'=>bcrypt($request->password),
         'mobile'=>$request->mobile_number
@@ -45,7 +48,7 @@ class CustomerController extends Controller
 
        notify()->success('Customer Registration Successful.');
 
-       return redirect()->back();
+       return redirect()->route('home');
 
 
 
@@ -86,7 +89,8 @@ class CustomerController extends Controller
 
             auth('customerGuard')->logout();
             notify()->error('Account Not verified');
-            return redirect()->route('otp.page');
+            $email=$customer->email;
+            return view('frontend.pages.otp',compact('email'));
         }
         
        }else
