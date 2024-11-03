@@ -30,7 +30,7 @@ class CustomerController extends Controller
         if($validation->fails())
         {
             notify()->error($validation->getMessageBag());
-            return redirect()->back();
+            return redirect()->back()->withInput();
         }
 
        // query
@@ -141,5 +141,34 @@ class CustomerController extends Controller
         notify()->success('Order cancelled.');
         return redirect()->back();
 
+    }
+
+    public function editProfile()
+    {
+        return view('frontend.pages.profile-edit');    
+    }
+
+    public function updateProfile(Request $request)
+    {
+       
+        $fileName=null;
+        if($request->hasFile('image'))
+        {
+            $file=$request->file('image');
+            // $file=request()->file('image')
+            $fileName=date('ymdhis').'.'.$file->getClientOriginalExtension();
+            $file->storeAs('/customers',$fileName);
+        }
+
+       $user=auth('customerGuard')->user();
+       $user->update([
+        'name'=>$request->customer_name,
+        'image'=>$fileName
+       ]);
+
+       notify()->success('update success.');
+
+       return redirect()->back();
+        
     }
 }

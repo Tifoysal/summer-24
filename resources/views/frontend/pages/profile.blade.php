@@ -76,12 +76,13 @@
 		<div class="account-settings">
 			<div class="user-profile">
 				<div class="user-avatar">
-					<img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Maxwell Admin">
+					<img src="" alt="user image">
 				</div>
 				<h5 class="user-name">Name: {{auth('customerGuard')->user()->name}}</h5>
 				<h6 class="user-email">Email: {{auth('customerGuard')->user()->email}}</h6>
 			</div>
 			<div class="about">
+        <a href="{{route('edit.profile')}}" class="btn btn-success">Edit profile</a>
 				<h5>Mobile</h5>
 				<p>{{auth('customerGuard')->user()->mobile}}</p>
 			</div>

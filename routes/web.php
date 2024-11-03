@@ -59,6 +59,11 @@ Route::group(['middleware' => 'changeLang'], function () {
         Route::post('/place-order', [OrderController::class, 'placeOrder'])->name('order.place');
 
         Route::get('/view-profile', [FrontendCustomerController::class, 'viewProfile'])->name('view.profile');
+        
+        Route::get('/edit-profile',[FrontendCustomerController::class,'editProfile'])->name('edit.profile');
+        
+        Route::post('/update-profile',[FrontendCustomerController::class,'updateProfile'])->name('profile.update');
+
         Route::get('/order-cancel/{order_id}', [FrontendCustomerController::class, 'cancelOrder'])->name('cancel.order');
 
         Route::get('/view-invoice/{order_id}', [OrderController::class, 'viewInvoice'])->name('view.invoice');

@@ -438,12 +438,12 @@
         <div class="modal-body">
           <div>
             <label for="">Enter your name:</label>
-            <input required type="text" name="customer_name" placeholder="Enter your name" class="form-control">
+            <input value="{{old('customer_name')}}" required type="text" name="customer_name" placeholder="Enter your name" class="form-control">
           </div>
 
           <div>
             <label for="">Enter your email:</label>
-            <input required type="email" name="email" placeholder="Enter your email" class="form-control">
+            <input value="{{old('email')}}" required type="email" name="email" placeholder="Enter your email" class="form-control">
           </div>
 
           <div>
@@ -459,7 +459,7 @@
 
           <div>
             <label for="">Enter your Mobile Number:</label>
-            <input required type="text" name="mobile_number" placeholder="Enter your Mobile number" class="form-control">
+            <input value="{{old('mobile_number')}}" required type="text" name="mobile_number" placeholder="Enter your Mobile number" class="form-control">
           </div>
 
         </div>
