@@ -8,16 +8,29 @@ use GuzzleHttp\Handler\Proxy;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Validator;
+use Yajra\DataTables\Facades\DataTables;
 
 class ProductController extends Controller
 {
     public function productList(){
 
-       $allProduct=Product::with('category')->paginate(5);
-     
+      
     //    dd($allProduct);
 
-        return view('backend.product-list',compact('allProduct'));
+        return view('backend.product-list');
+    }
+
+    public function getProductData()
+    {
+        $data=Product::all();
+        return DataTables::of($data)
+                    ->addIndexColumn()
+                    ->addColumn('action', function($row){
+                           $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a><a href="" class="edit btn btn-success btn-sm">Edit</a>';
+                            return $btn;
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);    
     }
 
 

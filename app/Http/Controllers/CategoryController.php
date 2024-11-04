@@ -12,7 +12,7 @@ class CategoryController extends Controller
     public function list()
     {
         
-        $allCategory=Category::with('parent')->paginate(20);
+        $allCategory=Category::with('parent')->paginate(2);
 
         // dd($allCategory);
        

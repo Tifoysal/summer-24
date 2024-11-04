@@ -131,5 +131,7 @@ Route::group(['prefix' => 'admin'], function () {
 
         Route::resource('users',UserController::class);
 
+        Route::get('/ajax-product-data',[ProductController::class,'getProductData'])->name('ajax.product.data');
+
     });
 });

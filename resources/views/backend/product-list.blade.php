@@ -25,7 +25,7 @@
 </div>
 
 
-<table class="table">
+<table class="data-table">
   <thead>
     <tr>
       <th scope="col">#</th>
@@ -40,33 +40,48 @@
   </thead>
   <tbody>
 
-    @foreach ($allProduct as $key=>$product)
-     
-    <tr>
-      <th scope="row">{{$key+1}}</th>
-      <td>
-        <img src="{{url('/uploads/'.$product->image)}}" alt="" width="60">
-      </td>
-      <td>{{$product->name}}</td>
-      <td>{{$product->price}} BDT</td>       
-      <td>{{$product->discount}}%</td>       
-      @if(session()->has('alert') and  (int) session()->get('alert') < $product->stock) 
-      <td>{{$product->stock}}</td>
-      @else
-      <td style="background: red;">{{$product->stock}}</td>
-      @endif
-      <td>{{$product->category->name}}</td>
-      <td>
-        <a href="{{route('product.view',$product->id)}}" class="btn btn-primary">View</a>
-        <a href="{{route('product.edit',$product->id)}}" class="btn btn-success">Edit</a>
-        <a href="{{route('product.delete',$product->id)}}" class="btn btn-danger">Delete</a>
-      </td>
-    </tr>
-    @endforeach
-
-
   </tbody>
 </table>
 
-{{ $allProduct->links() }}
 @endsection
+
+@push('js')
+
+
+<script type="text/javascript">
+
+  $(function () {
+
+    let table = $('.data-table').DataTable({
+
+        processing: true,
+
+        serverSide: false,
+
+        ajax: "{{ route('ajax.product.data') }}",
+
+        columns: [
+
+            {data: 'id', name: 'id'},
+
+            {data: 'image', name: 'image'},
+            {data: 'name', name: 'name'},
+
+            {data: 'price', name: 'price',searchable:true},
+            {data: 'discount', name: 'discount'},
+            {data: 'stock', name: 'stock' ,searchable:false},
+            {data: 'category_id', name: 'category_id'},
+            
+
+            {data: 'action', name: 'action', orderable: false, searchable: false},
+
+        ]
+
+    });
+
+    
+
+  });
+
+</script>
+@endpush 
