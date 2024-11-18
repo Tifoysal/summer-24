@@ -12,11 +12,11 @@ class CategoryController extends Controller
     public function list()
     {
         
-        $allCategory=Category::with('parent')->paginate(2);
+        $allCategory=Category::with('parent')->paginate(10);
 
-        // dd($allCategory);
+        $parents=Category::with('child')->where('parent_id',null)->get();
        
-       return view('backend.category-list',compact('allCategory'));   
+       return view('backend.category-list',compact('allCategory','parents'));   
     }
 
     public function form()
