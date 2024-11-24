@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Validator;
 use Throwable;
 
@@ -11,12 +12,27 @@ class CategoryController extends Controller
 {
     public function list()
     {
-        
-        $allCategory=Category::with('parent')->paginate(10);
 
+        // Cache::forget('cats');
+        if(Cache::get('cats'))
+        {
+            //data from cache
+            $title="data from Cache";
+            $allCategory=Cache::get('cats');
+
+        }else{
+            // data from database
+            $title="data from Database";
+
+            $allCategory=Category::with('parent')->paginate(10);
+            Cache::put('cats',$allCategory);
+        }
+        
+      
         $parents=Category::with('child')->where('parent_id',null)->get();
        
-       return view('backend.category-list',compact('allCategory','parents'));   
+         
+       return view('backend.category-list',compact('allCategory','title','parents'));   
     }
 
     public function form()
@@ -54,6 +70,7 @@ class CategoryController extends Controller
                 'description'=>$request->cat_description
             ]);
     
+            Cache::forget('cats');
             return redirect()->back();
 
         }catch(Throwable $e)
