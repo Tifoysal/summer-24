@@ -7,6 +7,8 @@
 <!-- <button type="button" class="btn btn-primary">Primary</button> -->
 <a class="btn btn-primary" href="{{route('category.form')}}">Create Category</a>
 
+<h1>{{$title}}</h1>
+
 <table class="table">
   <thead>
     <tr>
