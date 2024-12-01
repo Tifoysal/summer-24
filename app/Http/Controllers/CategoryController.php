@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\CreateCategory;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
@@ -69,8 +70,9 @@ class CategoryController extends Controller
                 'parent_id'=>$request->parent_id,
                 'description'=>$request->cat_description
             ]);
+
+            CreateCategory::dispatch();
     
-            Cache::forget('cats');
             return redirect()->back();
 
         }catch(Throwable $e)
@@ -91,6 +93,8 @@ class CategoryController extends Controller
         try{
             $category=Category::find($id);
             $category->delete();
+
+            CreateCategory::dispatch();
     
             notify()->success('Category deleted.');
             return redirect()->back();

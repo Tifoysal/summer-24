@@ -22,7 +22,7 @@ class ProductController extends Controller
 
     public function getProductData()
     {
-        $data=Product::all();
+        $data=Product::with('category')->get();
         return DataTables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
