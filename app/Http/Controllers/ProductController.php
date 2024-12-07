@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProductRequest;
 use App\Models\Category;
 use App\Models\Product;
+use App\Repositories\ProductRepository;
+use App\Services\FileUploadService;
 use GuzzleHttp\Handler\Proxy;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
@@ -43,52 +46,10 @@ class ProductController extends Controller
 
     }
 
-
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
-
-        // dd($request->all());
-
-        $validation=Validator::make($request->all(),[
-            'product_name'=>'required',
-            'product_price'=>'required|numeric|min:10',
-            'product_image'=>'required|file|max:1024',
-            'category_id'=>'required',
-            'product_stock'=>'required',
-            'product_discount'=>'nullable|numeric',
-        ]);
-
-        if($validation->fails())
-        {
-            notify()->error($validation->getMessageBag());
-            return redirect()->back();
-        }
-
-        $fileName=null;
-       
-        //check file exist
-        if($request->hasFile('product_image'))
-        {
-       
-            $file=$request->file('product_image');
-
-            //file name generate
-            $fileName=date('Ymdhis').'.'.$file->getClientOriginalExtension();
-
-             //file store where i want to 
-            $file->storeAs('/',$fileName);
-       
-        }
-
-       Product::create([
-        'name'=>$request->product_name,
-        'price'=>$request->product_price,
-        'discount'=>$request->product_discount,
-        'image'=>$fileName,
-        'stock'=>$request->product_stock,
-        'category_id'=>$request->category_id
-       ]);
-
+        $name=FileUploadService::fileUpload($request->file('product_image'),'/');
+        ProductRepository::store($request,$name);
        return redirect()->route('product.list');
 
     }
