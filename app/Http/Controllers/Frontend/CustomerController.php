@@ -7,6 +7,7 @@ use App\Models\Customer;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\Product;
+use App\Services\FileUploadService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Validator;
@@ -150,16 +151,9 @@ class CustomerController extends Controller
 
     public function updateProfile(Request $request)
     {
-       
-        $fileName=null;
-        if($request->hasFile('image'))
-        {
-            $file=$request->file('image');
-            // $file=request()->file('image')
-            $fileName=date('ymdhis').'.'.$file->getClientOriginalExtension();
-            $file->storeAs('/customers',$fileName);
-        }
 
+       $fileName= FileUploadService::fileUpload($request->file('image'),'/customers');
+       
        $user=auth('customerGuard')->user();
        $user->update([
         'name'=>$request->customer_name,

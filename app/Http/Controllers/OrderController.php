@@ -3,13 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Frontend\PaymentController;
-use App\Mail\OrderEmail;
+use App\Jobs\OrderConfirmationEmailJob;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Throwable;
 
@@ -211,7 +210,8 @@ class OrderController extends Controller
          //send order confirmation email
          session()->forget('basket');
 
-         Mail::to($request->email)->send(new OrderEmail($order));
+         
+         dispatch(new OrderConfirmationEmailJob($request->email,$order));
 
 
         if($request->paymentMethod != 'cod')
@@ -224,7 +224,8 @@ class OrderController extends Controller
             
         }
            
-
+        notify()->success('Order placed');
+        return redirect()->back();
         
     }catch(Throwable $exception){
 

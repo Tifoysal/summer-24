@@ -125,10 +125,10 @@
   </thead>
   <tbody>
 
-@foreach ($allCategory as $cat)
+@foreach ($allCategory as $key=>$cat)
  
 <tr>
-      <th scope="row">{{$cat->id}}</th>
+      <th scope="row">{{$key+1}}</th>
       <td>{{$cat->name}}</td>
       <td>{{optional($cat->parent)->name}}</td>
       <!-- <td>{{is_null($cat->parent) ? 'null' : $cat->parent->name}}</td> -->

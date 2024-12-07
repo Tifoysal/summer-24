@@ -70,7 +70,7 @@
             {data: 'price', name: 'price',searchable:true},
             {data: 'discount', name: 'discount'},
             {data: 'stock', name: 'stock' ,searchable:false},
-            {data: 'category_id', name: 'category_id'},
+            {data: 'category.name', name: 'category.name'},
             
 
             {data: 'action', name: 'action', orderable: false, searchable: false},
