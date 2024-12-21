@@ -173,6 +173,7 @@
               <a href="{{route('view.profile')}}" class="">
                 {{ auth('customerGuard')->user()->name }}
               </a>
+              <img style="width: 50px;" src="{{auth('customerGuard')->user()->image}}" alt="image">
             </li>
 
             <li>
@@ -510,6 +511,8 @@
         </div>
       </form>
 
+      <a class="btn btn-success" href="{{route('social.login','github')}}">Login with github</a>
+      <a class="btn btn-primary" href="{{route('social.login','facebook')}}">Login with Facebook</a>
 
     </div>
   </div>

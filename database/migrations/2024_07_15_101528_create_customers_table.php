@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('mobile',14)->unique();
             $table->string('image')->nullable();
             $table->date('dob')->nullable();
+            $table->string('provider_id')->nullable();
+            $table->rememberToken();
             $table->timestamps();
         });
     }

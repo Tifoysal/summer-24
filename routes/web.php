@@ -23,6 +23,8 @@ use Illuminate\Support\Facades\Route;
 Route::group(['middleware' => 'changeLang'], function () {
 
     Route::get('/', [FrontendHomeController::class, 'home'])->name('home');
+    Route::get('/social-login/callback', [FrontendHomeController::class, 'callback'])->name('social.callback');
+    Route::get('/sociallogin/{provider}', [FrontendHomeController::class, 'socialLogin'])->name('social.login');
 
     Route::get('/change/lang/{lang_name}', [FrontendHomeController::class, 'changeLang'])->name('change.lang');
     Route::get('/all-products', [FrontendProductController::class, 'allProduct'])->name('frontend.products');

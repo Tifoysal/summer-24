@@ -17,6 +17,7 @@ return new class extends Migration
             $table->double('price',10,2);
             $table->integer('discount')->nullable();
             $table->string('image')->nullable();
+            // $table->string('category_id')->nullable();
             $table->foreignId('category_id')->constrained('categories')->restrictOnDelete();
             $table->integer('stock');
             //image/any file will store in filesystem- then that path

@@ -24,6 +24,18 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'facebook' => [
+        'key' => env('AWS_ACCESS_KEY_ID'),
+        'secret' => env('AWS_SECRET_ACCESS_KEY'),
+        'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
+    ],
+
+    'github' => [
+        'client_id' => env('GITHUB_ID','Iv23li3o9IOlPDJGNJoN'),
+        'client_secret' => env('GITHUB_SECRET','2e74a5fdcbe43589369a5662c5109bc0f037be90'),
+        'redirect' => env('REDIRECT','http://summer-24.test/social-login/callback'),
+    ],
+
     'resend' => [
         'key' => env('RESEND_KEY'),
     ],
