@@ -29,11 +29,11 @@ class CategoryController extends Controller
             Cache::put('cats',$allCategory);
         }
         
+      
+        $parents=Category::with('child')->where('parent_id',null)->get();
        
-
-        // dd($allCategory);
-       
-       return view('backend.category-list',compact('allCategory','title'));   
+         
+       return view('backend.category-list',compact('allCategory','title','parents'));   
     }
 
     public function form()
