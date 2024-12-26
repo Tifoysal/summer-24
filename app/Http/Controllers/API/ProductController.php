@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\ProductResource;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -11,13 +12,23 @@ class ProductController extends Controller
 {
     
     public $total;
+   
     public function allProducts()
     {
     
         $products=Product::all();
         
 
-        return $this->responseSuccess($products,'All Products.');
+        return $this->responseSuccess(ProductResource::collection($products),'All Products.');
+       
+    }
+    public function singleProduct($id)
+    {
+    
+        $products=Product::find($id);
+        
+
+        return $this->responseSuccess(ProductResource::make($products),'Single Products.');
        
     }
 

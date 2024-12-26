@@ -18,6 +18,6 @@ class ProductsTableSeeder extends Seeder
             'name'=>'Fashion',
             'slug'=>'fashion',
         ]);
-        Product::factory()->count(1000)->create();
+        Product::factory()->count(100)->create();
     }
 }

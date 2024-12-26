@@ -8,6 +8,8 @@
     <h1>Product List</h1>
     @if(checkPermission('product.create'))
     <a class="btn btn-success" href="{{route('product.create')}}">Create new product</a>
+    <a class="btn btn-primary" href="{{route('product.export')}}">Export</a>
+
     @endif
   </div>
 
@@ -19,7 +21,9 @@
       <button class="btn btn-success">Set</button>
 
     </form>
+    
   </div>
+
 
 
 </div>

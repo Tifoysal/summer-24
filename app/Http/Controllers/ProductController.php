@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\ProductExport;
 use App\Http\Requests\ProductRequest;
 use App\Models\Category;
 use App\Models\Product;
@@ -11,6 +12,7 @@ use GuzzleHttp\Handler\Proxy;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Validator;
+use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
 
 class ProductController extends Controller
@@ -110,6 +112,13 @@ class ProductController extends Controller
 
         session()->put('alert',$request->alert_qty);
         return redirect()->back();
+    }
+
+    public function productExport() 
+    {
+         // product_2024-12-22.xlsx
+        return Excel::download(new ProductExport, 'product_'.date('Y-m-d').'.xlsx');
+       
     }
 
 

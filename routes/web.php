@@ -107,6 +107,7 @@ Route::group(['prefix' => 'admin'], function () {
 
 
         Route::get('/product-list', [ProductController::class, 'productList'])->name('product.list');
+        Route::get('/product-export', [ProductController::class, 'productExport'])->name('product.export');
 
         Route::get('/product-create', [ProductController::class, 'create'])->name('product.create');
 
